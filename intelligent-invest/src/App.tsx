@@ -1,18 +1,12 @@
 import React from 'react';
-import { Container, Row ,Col } from "react-bootstrap";
+// import { Container, Row ,Col } from "react-bootstrap";
+import Graph from "./components/Graph";
 
 function App() {
   return (
     <>
-    <div className="App">
-      <Container>
-        <Row>
-            <Col>1</Col>
-            <Col>2</Col>
-            <Col>3</Col>
-        </Row>
-      </Container>
-
+    <div>
+      <Graph Quote="MSFT" Time="1y"/>
     </div>
     </>
   );

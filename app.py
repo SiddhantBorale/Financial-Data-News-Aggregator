@@ -2,7 +2,6 @@ from flask import Flask, request
 from flask_cors import CORS
 
 from models.Stock import Stock
-from util import searchtweets
 
 app = Flask(__name__)
 CORS(app)
@@ -25,6 +24,23 @@ def all():
         stock_news = stock.get_news(stock_info["LongName"])
 
         return {"StockInfo": stock_info, "StockData": stock_data, "StockNews": stock_news}
+
+
+@app.route("/graph", methods = ["POST"])
+def graph():
+    quote = request.form.get("quote")
+    time = request.form.get("time")
+    stock = Stock(quote)
+    stock_data = stock.get_stock_data(time)
+
+    x = []
+
+    data = []
+
+    for i in range(len(stock_data["Close"])):
+        data.append({"Close": round(stock_data["Close"][i], 3), "X": i+1})
+
+    return {"Data": data}
 
 
 if __name__ == "__main__":
