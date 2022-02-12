@@ -43,5 +43,13 @@ def graph():
     return {"Data": data}
 
 
+@app.route("/info",  methods = ["POST"])
+def info():
+    quote = request.form.get("quote")
+    stock = Stock(quote)
+    stock_info = stock.get_stock_info()
+    return {"StockInfo": stock_info}
+        
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, threaded=True, debug=True)
