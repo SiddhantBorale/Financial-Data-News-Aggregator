@@ -46,28 +46,28 @@ const Graph = (props: Props) => {
 
     return (
         <>
-            <h2>{props.Quote} Graph (5y)</h2>
+            <h2>{props.Quote} Graph {props.Time}</h2>
             <br />
             {loaded ? 
                     <div>
-                    <LineChart
-                        width={1200}
-                        height={500}
-                        data={graphData.Data}
-                        margin={{
-                            top: 5,
-                            right: 30,
-                            left: 20,
-                            bottom: 5,
-                        }}
-                        >
-                        <Tooltip />
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="X" />
-                        <Line type="monotone" dataKey="Close" stroke="green" activeDot={{ r: 5 }} />
-                        <Legend />
-                    </LineChart>  
-                </div>:
+                        <LineChart
+                            width={1200}
+                            height={500}
+                            data={graphData.Data}
+                            margin={{
+                                top: 5,
+                                right: 30,
+                                left: 20,
+                                bottom: 5,
+                            }}
+                            >
+                            <Tooltip />
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="X" />
+                            <Line type="monotone" dataKey="Close" stroke="green" activeDot={{ r: 5 }} />
+                            <Legend />
+                        </LineChart>  
+                    </div>:
                 "Loading data...."}
         </>
     );
