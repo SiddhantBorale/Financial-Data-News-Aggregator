@@ -32,6 +32,7 @@ def graph():
     time = request.form.get("time")
     stock = Stock(quote)
     stock_data = stock.get_stock_data(time)
+    stock_info = stock.get_stock_info()
 
     x = []
 
@@ -40,7 +41,7 @@ def graph():
     for i in range(len(stock_data["Close"])):
         data.append({"Close": round(stock_data["Close"][i], 3), "X": i+1})
 
-    return {"Data": data}
+    return {"Data": data, "url": stock_info["Website"], "name": stock_info["LongName"]}
 
 
 @app.route("/info",  methods = ["POST"])

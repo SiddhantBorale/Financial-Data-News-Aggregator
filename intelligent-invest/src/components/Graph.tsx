@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Legend, Tooltip } from "recharts";
+import { LineChart, Line, CartesianGrid, XAxis, Legend, Tooltip, ResponsiveContainer } from "recharts";
 
 interface GraphData {
     Close: Array<number>,
@@ -19,8 +19,8 @@ interface Props {
 const Graph = (props: Props) => {
     const [graphData, setGraphData] = useState<Graph | any>();
     const [loaded, setLoaded] = useState(false);
-    const [close, setClose] = useState<number[]>();
-    const [x, setX] = useState<number[]>();
+    const [url, setURL] = useState("");
+    const [name, setName] = useState("");
 
     const getData = async() => {
 
@@ -35,8 +35,8 @@ const Graph = (props: Props) => {
         console.log("RespJSON: ", respJSON);
 
         setGraphData(respJSON);
-        setClose(respJSON.Close);
-        setX(respJSON.X);
+        setURL(respJSON.url);
+        setName(respJSON.name);
         setLoaded(true);
     }
 
@@ -46,27 +46,26 @@ const Graph = (props: Props) => {
 
     return (
         <>
-            <h2>{props.Quote} Graph {props.Time}</h2>
-            <br />
             {loaded ? 
                     <div>
-                        <LineChart
-                            width={1200}
-                            height={500}
-                            data={graphData.Data}
-                            margin={{
-                                top: 5,
-                                right: 30,
-                                left: 20,
-                                bottom: 5,
-                            }}
-                            >
-                            <Tooltip />
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="X" />
-                            <Line type="monotone" dataKey="Close" stroke="green" activeDot={{ r: 5 }} />
-                            <Legend />
-                        </LineChart>  
+                        <h2><a href={url}>{name} ({props.Quote})</a></h2>
+                        <ResponsiveContainer width="70%" height={750}>
+                            <LineChart
+                                data={graphData.Data}
+                                margin={{
+                                    top: 5,
+                                    right: 30,
+                                    left: 20,
+                                    bottom: 5,
+                                }}
+                                >
+                                <Tooltip />
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="X" />
+                                <Line type="monotone" dataKey="Close" stroke="green" activeDot={{ r: 3 }} />
+                                <Legend />
+                            </LineChart>
+                        </ResponsiveContainer>
                     </div>:
                 "Loading data...."}
         </>
