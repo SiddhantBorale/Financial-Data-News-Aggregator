@@ -1,0 +1,16 @@
+.NewsHeader {
+    font-size: medium;
+}
+
+a:link {
+    text-decoration: none;
+    color: black;
+  }
+
+a:hover {
+    color: green;
+}
+
+a:active {
+    text-decoration: underline;
+}
