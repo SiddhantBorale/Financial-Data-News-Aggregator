@@ -14,30 +14,24 @@ interface Graph {
 
 interface Props {
     Quote: string,
-    Time: string
 };
 
-const Graph = (props: Props) => {
+const PredictGraph = (props: Props) => {
     const [graphData, setGraphData] = useState<Graph | any>();
     const [loaded, setLoaded] = useState(false);
-    const [url, setURL] = useState("");
-    const [name, setName] = useState("");
 
     const getData = async() => {
 
-        const url = "http://172.24.135.24:8080/graph";
+        const url = "http://172.24.135.24:8080/predict";
         const formdata = new FormData();
         formdata.append("quote", props.Quote);
-        formdata.append("time", props.Time);
 
         const resposne = await fetch(url, {method: "POST", body: formdata});
-        console.log("Response is: ", resposne);
+        console.log("Response future is: ", resposne);
         const respJSON = await resposne.json();
-        console.log("RespJSON: ", respJSON);
+        console.log("RespJSON future: ", respJSON);
 
-        setGraphData(respJSON);
-        setURL(respJSON.url);
-        setName(respJSON.name);
+        setGraphData(respJSON.data);
         setLoaded(true);
     }
 
@@ -49,15 +43,15 @@ const Graph = (props: Props) => {
         <>
             {loaded ? 
                     <div style={{"paddingTop": "5%", "paddingLeft": "0"}}>
-                        <h2><a href={url}>{name} ({props.Quote}) [{props.Time} Latest]</a></h2>
+                        <h2>Future Stock Trend (90 days)</h2>
                         <ResponsiveContainer width="100%" height={750}>
                             <LineChart
-                                data={graphData.Data}
+                                data={graphData}
                                 >
                                 <Tooltip/>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="X" />
-                                <Line dot={false} type="monotone" dataKey="Close" stroke="green" activeDot={{ r: 3 }} />
+                                <Line dot={false} type="monotone" dataKey="Close" stroke="blue" activeDot={{ r: 3 }} />
                                 <Legend />
                             </LineChart>
                         </ResponsiveContainer>
@@ -65,7 +59,6 @@ const Graph = (props: Props) => {
                 "Loading data...."}
         </>
     );
-
 }
 
-export default Graph;
+export default PredictGraph;

@@ -49,7 +49,7 @@ const News = (props: props) => {
         const data = new FormData();
         data.append("quote", props.Quote);
         
-        const response = await fetch ("http://10.1.242.162:8080/all", {method: "POST", body: data});
+        const response = await fetch ("http://172.24.135.24:8080/news", {method: "POST", body: data});
         console.log("Response(Non-JSON): ", response);
         const returnData = await response.json();
         console.log("Response(JSON): ", returnData);
@@ -60,7 +60,7 @@ const News = (props: props) => {
 
     useEffect(() => {
         fetchData();
-    }, [])
+    }, [props.Quote])
 
     // const scrollToElement = () => testref?.current?.scrollIntoView();
     return (

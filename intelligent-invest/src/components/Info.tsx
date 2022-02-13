@@ -28,7 +28,7 @@ const Info = (props: IProps) => {
         const data = new FormData();
         data.append("quote", props.Quote);
 
-        const url = "http://10.1.242.162:8080/info";
+        const url = "http://172.24.135.24:8080/info";
 
         const resposne = await fetch(url, {method: "POST", body: data});
         console.log("Response: ", resposne);
@@ -37,12 +37,11 @@ const Info = (props: IProps) => {
 
         setInfoData(infoResp.StockInfo);
         setLoadedData(true);
-
     }
 
     useEffect(() => {
         fetchInfo();
-    }, [])
+    }, [props.Quote])
 
     return (
         <>

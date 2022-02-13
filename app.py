@@ -3,6 +3,10 @@ from flask_cors import CORS
 
 from models.Stock import Stock
 
+import numpy as np
+
+from util import getstockdata
+
 app = Flask(__name__)
 CORS(app)
 
@@ -11,19 +15,15 @@ def index():
     return "Hello World from python flask"
 
 
-@app.route("/all", methods = ["POST"])
+@app.route("/news", methods = ["POST"])
 def all():
     if request.method == "POST":
-        print("Inside post...")
         quote = request.form.get("quote")
-        print("Quote: ", quote)
         stock = Stock(quote)
-
         stock_info = stock.get_stock_info()
-        stock_data = stock.get_stock_data("5y")
         stock_news = stock.get_news(stock_info["LongName"])
 
-        return {"StockInfo": stock_info, "StockData": stock_data, "StockNews": stock_news}
+        return {"StockNews": stock_news}
 
 
 @app.route("/graph", methods = ["POST"])
@@ -33,8 +33,6 @@ def graph():
     stock = Stock(quote)
     stock_data = stock.get_stock_data(time)
     stock_info = stock.get_stock_info()
-
-    x = []
 
     data = []
 
@@ -51,6 +49,29 @@ def info():
     stock_info = stock.get_stock_info()
     return {"StockInfo": stock_info}
         
+
+@app.route("/predict", methods=["POST"])
+def predict():
+    quote = request.form.get("quote")
+    x, y = getstockdata.getData(quote)
+
+    print("Starting calculations...")
+
+    a, b = np.polyfit(x, y, 1)
+
+    predicted = []
+    new_x = []
+
+    data = []
+
+    for i in range(253, 344):
+        predicted.append(a*i + b)
+        new_x.append(i)
+        data.append({"Close": round((a*i + b), 3), "X": i+1})
+
+    print("Ended calcs...")
+
+    return {"data": data}
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, threaded=True, debug=True)
