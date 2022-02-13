@@ -1,5 +1,5 @@
 .NewsHeader {
-    font-size: medium;
+    font-size: large;
 }
 
 a:link {
@@ -13,4 +13,17 @@ a:hover {
 
 a:active {
     text-decoration: underline;
+}
+
+.infoTable {
+    font-family: Arial;
+    font-size: large;
+}
+
+.c1 {
+    color: red;
+}
+
+.c2 {
+    color: rgb(0, 255, 0);
 }

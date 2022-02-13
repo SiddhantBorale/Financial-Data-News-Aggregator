@@ -49,27 +49,24 @@ const Info = (props: IProps) => {
             {loadedData ? 
                 <div>
                     <div className={"NewsHeader"}>
-                        Long Name: {infoData?.LongName}
-                        <hr />
-                        Website: <a href={infoData?.Website}>{infoData?.Website}</a>
-                        <hr />
-                        Sector: {infoData?.Sector}
-                        <hr />
-                        Industry: {infoData?.Industry}
-                        <hr />
-                        Gross Margin: {infoData?.GrossMargin}
-                        <hr />
-                        Profit Margin: {infoData?.ProfitMargin}
-                        <hr />
-                        Return On Assets: {infoData?.ReturnOnAssets}
-                        <hr />
-                        Total Cash: {infoData?.TotalCash}
-                        <hr />
-                        Total Debt: {infoData?.TotalDebt}
-                        <hr />
-                        Total Revenue: {infoData?.TotalRevenue}
-                        <hr />
-                    </div>                    
+                        <pre>
+                        <table className={"infoTable"}>
+                        <tr>
+                        <th className={"c1"}>Gross Margin: {infoData?.GrossMargin}</th>
+                        <th className={"c2"}>                    Profit Margin: {infoData?.ProfitMargin}</th>
+                        </tr>
+                        <br />
+                        <tr>
+                        <th>Return On Assets: {infoData?.ReturnOnAssets}</th>    
+                        <th>                    Total Revenue: {infoData?.TotalRevenue}</th>
+                        </tr>
+                        <br />
+                        <tr>
+                        <th>Total Cash: {infoData?.TotalCash}</th>   
+                        <th>                    Total Debt: {infoData?.TotalDebt}</th>
+                        </tr>
+                        <hr /></table></pre>
+                    </div>                  
                 </div>
              : "Loading Data"}
         </>

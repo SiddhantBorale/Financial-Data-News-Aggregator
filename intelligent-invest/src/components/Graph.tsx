@@ -47,17 +47,11 @@ const Graph = (props: Props) => {
     return (
         <>
             {loaded ? 
-                    <div>
+                    <div style={{"paddingTop": "5%", "paddingLeft": "0"}}>
                         <h2><a href={url}>{name} ({props.Quote})</a></h2>
-                        <ResponsiveContainer width="70%" height={750}>
+                        <ResponsiveContainer width="100%" height={750}>
                             <LineChart
                                 data={graphData.Data}
-                                margin={{
-                                    top: 5,
-                                    right: 30,
-                                    left: 20,
-                                    bottom: 5,
-                                }}
                                 >
                                 <Tooltip />
                                 <CartesianGrid strokeDasharray="3 3" />

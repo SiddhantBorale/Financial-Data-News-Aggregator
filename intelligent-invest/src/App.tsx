@@ -15,16 +15,15 @@ function App() {
         <Container>
           <Row>
             <Col>
-              <Graph Quote='TSLA' Time='1y'/>
+              <Graph Quote='AAPL' Time='1y'/>
+              <br />
+              <Info Quote='AAPL' />
             </Col>
-            <Col>
-              <h2>News</h2>
-              <News Quote='TSLA' />
+            <Col xs lg="2" style={{"paddingTop": "5%"}}>
+              <h3>Latest News</h3>
+              <News Quote='AAPL'/>
             </Col>
           </Row>
-          <br />
-          <h2>Info</h2>
-          <Info Quote='TSLA' />
           <br />
         </Container>
       </div>

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useRef } from "react";
 import './Styles.css';
+import { LinkPreview } from '@dhaiwat10/react-link-preview';
+
 
 interface stockInfo { 
     Sector: string,
@@ -53,24 +56,25 @@ const News = (props: props) => {
 
         setStockData(returnData);
         setLoadedData(true);
-
     }
 
     useEffect(() => {
         fetchData();
     }, [])
 
+    // const scrollToElement = () => testref?.current?.scrollIntoView();
     return (
         <div>
-            <br />
             {loadedData ? 
                 <div>
                     {stockData.StockNews.Titles.map((title: string, index: number) => {
                         return(
-                            <div className={"NewsHeader"}>
-                                <a href={stockData.StockNews.Sources[index]}>{title}</a>
-                                <hr />
-                            </div>
+                            <article>
+                                <div className={"NewsHeader"}>
+                                    <LinkPreview url={stockData.StockNews.Sources[index]} width='400px' />
+                                    <hr />
+                                </div>
+                            </article>
                         );
                     })}
                 </div>
