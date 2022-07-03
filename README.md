@@ -25,6 +25,10 @@ cd intelligent-invest
 npm start
 ```
 
+## Screenshots
+![ss1](https://github.com/kpp16/hopperhacks/blob/main/ss01.png?raw=true)
+![ss2](https://github.com/kpp16/hopperhacks/blob/main/ss02.png?raw=true)
+
 ## Show your support
 
 Give a ⭐️ if this project helped you!
